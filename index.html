@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            color: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 40px;
+        }
+        .clock{
+            margin-top: 20%;
+            padding: 20px;
+            background-color: white;
+            color: orangered;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid green;
+            font-size: 36px;
+            gap: 0.5rem;
+            border-radius: 20px;
+            font-weight: 900;
+            
+        }
+        .hour{
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border-radius: 30px
+        }
+        .minutes{
+            background-color: black;
+            color: yellow;
+            border-radius: 30px;
+            padding: 10px;
+        }
+        .seconds{
+            background-color: white;
+            border: 1px solid red;
+            border-radius: 30px;
+            padding: 10px;
+        }
+        .time{
+            display: flex;
+            align-items: center;
+        
+                }
+                .date{
+                    font-size: 18px;
+                }
+                .ampm{
+                    margin-left: 10px;
+                    color: black;
+                    text-decoration: underline;
+                    
+                }
+               
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="time">
+            <div class="hour"></div>-
+            <div class="minutes"></div>-
+            <div class="seconds"></div>
+            <div class="ampm"></div>
+        </div>
+ 
+    <div class="date"> </div>
+
+</div>
+
+
+
+    <script>
+        
+        let hourElement = document.querySelector(".hour");
+        let minuteElement = document.querySelector(".minutes");
+        let secondElement = document.querySelector(".seconds");
+        let dateElement = document.querySelector(".date");
+        let ampmElement = document.querySelector(".ampm");
+        function clockFunction(){
+            let time = new Date();
+            console.log(time)
+            let hour = time.getHours(); 
+            let ampm;
+            if(hour >=12){
+                ampm = 'PM'
+            }else{
+                ampm = 'AM'
+            }
+            // const ampm = hour >= 12 ? "PM": 'AM';
+            //0-23
+            hour = hour%12;
+            console.log(hour);
+            if(hour==0){
+                hour = 12;
+            }else {
+                hour = hour;
+            }
+            // if(hour){
+            // hour = hour;
+            // }else {
+            //     hour = 12
+            // }
+            // hour = hour ? hour: 12;
+            let minutes = String(time.getMinutes()).padStart(2, 0);
+            
+            let seconds = String( time.getSeconds()).padStart(2, 0);
+
+            let day = String(time.getDate()).padStart(2, 0)
+            let month = String(time.getMonth()+1).padStart(2, 0)
+            let year = String(time.getFullYear()).padStart(2, 0)
+            
+            
+           let  formatedhour = String(hour).padStart(2, 0)
+            let fulldate = `Today's date is: ${day}/${month}/${year}`;
+            dateElement.innerHTML= fulldate
+            // use backticks when u want to output string and javascript variables  
+            // let fullTime = `${hour}-${minutes}-${seconds}`;
+            hourElement.innerHTML = formatedhour;
+            ampmElement.innerHTML = ampm;
+            minuteElement.innerHTML = minutes;
+            secondElement.innerHTML = seconds ;
+            
+        }
+        setInterval(clockFunction, 1000);
+        
+    </script>
+</body>
+</html>
